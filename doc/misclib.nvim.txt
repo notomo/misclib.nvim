@@ -1,0 +1,16 @@
+*misclib.nvim.txt*
+
+==============================================================================
+Lua module: misclib.module                       *misclib.nvim-misclib.module*
+
+find({path})                                           *misclib.module.find()*
+  Find specified module.
+
+  Parameters: ~
+    {path} (string) for `require()` argument
+
+  Return: ~
+    (any) If the module is not found, return nil.
+
+==============================================================================
+vim:tw=78:ts=8:ft=help
