@@ -1,4 +1,4 @@
-local helper = require("misclib.lib.testlib.helper")
+local helper = require("misclib.test.helper")
 local modulelib = helper.require("misclib.module")
 
 describe("modulelib.find()", function()

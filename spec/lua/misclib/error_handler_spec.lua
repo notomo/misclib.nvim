@@ -1,4 +1,4 @@
-local helper = require("misclib.lib.testlib.helper")
+local helper = require("misclib.test.helper")
 local error_handler = helper.require("misclib.error_handler")
 
 describe("error_handler.methods()", function()

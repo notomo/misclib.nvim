@@ -1,4 +1,4 @@
-local helper = require("misclib.lib.testlib.helper")
+local helper = require("misclib.test.helper")
 
 describe("ordered_dict", function()
   before_each(helper.before_each)
