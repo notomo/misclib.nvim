@@ -11,8 +11,8 @@ function M.warn(msg)
   vim.api.nvim_echo({ { M.wrap(msg), "WarningMsg" } }, true, {})
 end
 
-function M.info(msg)
-  vim.api.nvim_echo({ { M.wrap(msg) } }, true, {})
+function M.info(msg, hl_group)
+  vim.api.nvim_echo({ { M.wrap(msg), hl_group } }, true, {})
 end
 
 function M.wrap(msg)
