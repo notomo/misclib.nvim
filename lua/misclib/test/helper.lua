@@ -36,6 +36,10 @@ function helper.delete(path)
   vim.fn.delete(helper.test_data_dir .. path, "rf")
 end
 
+function helper.set_lines(lines)
+  vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.split(lines, "\n"))
+end
+
 local asserts = require("vusted.assert").asserts
 
 asserts.create("exists_message"):register(function(self)
