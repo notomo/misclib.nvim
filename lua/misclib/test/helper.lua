@@ -17,7 +17,6 @@ function helper.after_each()
   helper.cleanup_loaded_modules(plugin_name)
   vim.fn.delete(helper.root .. "/spec/test_data", "rf")
   vim.cmd("messages clear")
-  print(" ")
 end
 
 function helper.new_file(path, ...)

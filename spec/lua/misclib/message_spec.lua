@@ -5,7 +5,7 @@ describe("messagelib.info()", function()
   before_each(helper.before_each)
   after_each(helper.after_each)
 
-  it("echos a message", function()
+  it("echoes a message", function()
     messagelib.info("info_test")
     assert.exists_message("%[misclib%] info_test")
   end)
