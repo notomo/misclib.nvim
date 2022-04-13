@@ -49,6 +49,10 @@ asserts.create("window"):register_eq(function()
   return vim.api.nvim_get_current_win()
 end)
 
+asserts.create("current_line"):register_eq(function()
+  return vim.api.nvim_get_current_line()
+end)
+
 asserts.create("exists_message"):register(function(self)
   return function(_, args)
     local expected = args[1]
