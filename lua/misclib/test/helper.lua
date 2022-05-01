@@ -5,9 +5,7 @@ helper.root = helper.find_plugin_root(plugin_name)
 helper.runtimepath = vim.o.runtimepath
 
 function helper.before_each()
-  helper.test_data_path = "spec/test_data/" .. math.random(1, 2 ^ 30) .. "/"
-  helper.test_data_dir = helper.root .. "/" .. helper.test_data_path
-  helper.new_directory("")
+  helper.test_data = require("misclib.test.data_dir").setup(helper.root)
 end
 
 function helper.after_each()
@@ -15,24 +13,8 @@ function helper.after_each()
   vim.cmd("tabonly!")
   vim.cmd("silent %bwipeout!")
   helper.cleanup_loaded_modules(plugin_name)
-  vim.fn.delete(helper.root .. "/spec/test_data", "rf")
+  helper.test_data:teardown()
   vim.cmd("messages clear")
-end
-
-function helper.new_file(path, ...)
-  local f = io.open(helper.test_data_dir .. path, "w")
-  for _, line in ipairs({ ... }) do
-    f:write(line .. "\n")
-  end
-  f:close()
-end
-
-function helper.new_directory(path)
-  vim.fn.mkdir(helper.test_data_dir .. path, "p")
-end
-
-function helper.delete(path)
-  vim.fn.delete(helper.test_data_dir .. path, "rf")
 end
 
 function helper.set_lines(lines)
