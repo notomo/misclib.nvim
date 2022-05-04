@@ -9,12 +9,9 @@ function helper.before_each()
 end
 
 function helper.after_each()
-  vim.cmd("tabedit")
-  vim.cmd("tabonly!")
-  vim.cmd("silent %bwipeout!")
+  helper.cleanup()
   helper.cleanup_loaded_modules(plugin_name)
   helper.test_data:teardown()
-  vim.cmd("messages clear")
 end
 
 function helper.set_lines(lines)
