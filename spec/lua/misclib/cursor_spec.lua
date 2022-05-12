@@ -49,3 +49,30 @@ describe("cursorlib.set_column()", function()
     assert.same({ 2, 3 }, vim.api.nvim_win_get_cursor(0))
   end)
 end)
+
+describe("cursorlib.set()", function()
+  before_each(helper.before_each)
+  after_each(helper.after_each)
+
+  it("sets cursor position", function()
+    helper.set_lines([[
+
+1234
+
+]])
+
+    cursorlib.set({ 2, 3 })
+
+    assert.same({ 2, 3 }, vim.api.nvim_win_get_cursor(0))
+  end)
+
+  it("sets cursor position even if the row does not exist", function()
+    helper.set_lines([[
+
+1234]])
+
+    cursorlib.set({ 10, 3 })
+
+    assert.same({ 2, 3 }, vim.api.nvim_win_get_cursor(0))
+  end)
+end)
