@@ -7,7 +7,7 @@ describe("buffer.delete_by_name()", function()
 
   it("deletes if the named buffer exists", function()
     local name = "test://test"
-    vim.cmd([[new ]] .. name)
+    vim.cmd.new(name)
 
     bufferlib.delete_by_name(name)
 

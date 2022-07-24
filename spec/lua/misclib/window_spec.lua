@@ -6,7 +6,7 @@ describe("window.safe_close()", function()
   after_each(helper.after_each)
 
   it("closes valid window", function()
-    vim.cmd([[split]])
+    vim.cmd.split()
 
     windowlib.safe_close(0)
 
@@ -14,9 +14,9 @@ describe("window.safe_close()", function()
   end)
 
   it("does nothing with invalid window", function()
-    vim.cmd([[split]])
+    vim.cmd.split()
     local window_id = vim.api.nvim_get_current_win()
-    vim.cmd([[close]])
+    vim.cmd.close()
 
     windowlib.safe_close(window_id)
 
@@ -45,9 +45,9 @@ describe("window.safe_enter()", function()
   it("does nothing with invalid window", function()
     local current_window_id = vim.api.nvim_get_current_win()
 
-    vim.cmd([[split]])
+    vim.cmd.split()
     local window_id = vim.api.nvim_get_current_win()
-    vim.cmd([[close]])
+    vim.cmd.close()
 
     windowlib.safe_enter(window_id)
 
@@ -76,5 +76,20 @@ describe("window.is_floating()", function()
     local window_id = vim.api.nvim_get_current_win()
     local actual = windowlib.is_floating(window_id)
     assert.is_false(actual)
+  end)
+end)
+
+describe("window.jump()", function()
+  before_each(helper.before_each)
+  after_each(helper.after_each)
+
+  it("jumps to the position", function()
+    vim.cmd.tabedit()
+    local window_id = vim.api.nvim_get_current_win()
+    vim.cmd.tabprevious()
+
+    windowlib.jump(window_id, 1, 1)
+
+    assert.window(window_id)
   end)
 end)

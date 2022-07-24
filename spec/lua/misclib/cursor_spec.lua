@@ -17,17 +17,17 @@ bottom]])
   end)
 
   it("can set cursor position to the bottom in the specified window", function()
-    vim.cmd([[split]])
+    vim.cmd.split()
     local window_id = vim.api.nvim_get_current_win()
     helper.set_lines([[
 
 
 bottom]])
-    vim.cmd([[wincmd p]])
+    vim.cmd.wincmd("p")
 
     cursorlib.to_bottom(window_id)
 
-    vim.cmd([[wincmd p]])
+    vim.cmd.wincmd("p")
     assert.current_line("bottom")
   end)
 end)
@@ -42,7 +42,7 @@ describe("cursorlib.set_column()", function()
 1234
 
 ]])
-    vim.cmd([[normal! j]])
+    vim.cmd.normal({ args = { "j" }, bang = true })
 
     cursorlib.set_column(3)
 

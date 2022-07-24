@@ -11,19 +11,19 @@ describe("visual_mode.is_current()", function()
   end)
 
   it("returns true if character wise visual mode", function()
-    vim.cmd([[normal! v]])
+    vim.cmd.normal({ args = { "v" }, bang = true })
     local actual = visual_mode.is_current()
     assert.is_true(actual)
   end)
 
   it("returns true if line wise visual mode", function()
-    vim.cmd([[normal! V]])
+    vim.cmd.normal({ args = { "V" }, bang = true })
     local actual = visual_mode.is_current()
     assert.is_true(actual)
   end)
 
   it("returns true if block wise visual mode", function()
-    vim.cmd([[normal! ]] .. vim.api.nvim_eval('"\\<C-v>"'))
+    vim.cmd.normal({ args = { vim.api.nvim_eval('"\\<C-v>"') }, bang = true })
     local actual = visual_mode.is_current()
     assert.is_true(actual)
   end)
@@ -39,7 +39,7 @@ describe("visual_mode.leave()", function()
   end)
 
   it("changes to normal mode", function()
-    vim.cmd([[normal! v]])
+    vim.cmd.normal({ args = { "v" }, bang = true })
 
     local actual, mode = visual_mode.leave()
     assert.is_true(actual)
@@ -62,7 +62,7 @@ describe("visual_mode.row_range()", function()
 1
 2
 3]])
-    vim.cmd([[normal! V2j]])
+    vim.cmd.normal({ args = { "V2j" }, bang = true })
 
     local actual = visual_mode.row_range()
     assert.is_same(actual, { first = 1, last = 3 })
