@@ -39,7 +39,7 @@ describe("window.safe_enter()", function()
 
     windowlib.safe_enter(window_id)
 
-    assert.window(window_id)
+    assert.window_id(window_id)
   end)
 
   it("does nothing with invalid window", function()
@@ -51,7 +51,7 @@ describe("window.safe_enter()", function()
 
     windowlib.safe_enter(window_id)
 
-    assert.window(current_window_id)
+    assert.window_id(current_window_id)
   end)
 end)
 
@@ -90,6 +90,6 @@ describe("window.jump()", function()
 
     windowlib.jump(window_id, 1, 1)
 
-    assert.window(window_id)
+    assert.window_id(window_id)
   end)
 end)
