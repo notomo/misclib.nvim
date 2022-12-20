@@ -83,3 +83,29 @@ describe("pathlib.tail", function()
     end)
   end
 end)
+
+describe("pathlib.trim_slash", function()
+  before_each(helper.before_each)
+  after_each(helper.after_each)
+
+  for _, c in ipairs({
+    {
+      path = "/",
+      want = "/",
+    },
+    {
+      path = "a/",
+      want = "a",
+    },
+    {
+      path = "a",
+      want = "a",
+    },
+  }) do
+    local name = ([[("%s") == "%s"]]):format(c.path, c.want)
+    it(name, function()
+      local actual = pathlib.trim_slash(c.path)
+      assert.is_same(c.want, actual)
+    end)
+  end
+end)
