@@ -16,3 +16,16 @@ require("genvdoc").generate(full_plugin_name, {
     },
   },
 })
+
+local gen_readme = function()
+  local content = ([[
+# %s
+
+misc
+]]):format(full_plugin_name)
+
+  local readme = io.open("README.md", "w")
+  readme:write(content)
+  readme:close()
+end
+gen_readme()
