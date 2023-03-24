@@ -9,8 +9,8 @@ describe("highlightlib.define()", function()
     highlightlib.define("TestDefine1", {
       fg = 100,
     })
-    local got = vim.api.nvim_get_hl_by_name("TestDefine1", true)
-    assert.is_same({ foreground = 100 }, got)
+    local got = vim.api.nvim_get_hl(0, { name = "TestDefine1" })
+    assert.is_same({ fg = 100 }, got)
   end)
 
   it("returns highlight group name", function()
@@ -27,8 +27,8 @@ describe("highlightlib.link()", function()
 
   it("define a link highlight group", function()
     highlightlib.link("TestLink1", "String")
-    local want = vim.api.nvim_get_hl_by_name("String", true)
-    local got = vim.api.nvim_get_hl_by_name("TestLink1", true)
+    local want = vim.api.nvim_get_hl(0, { name = "String", link = false })
+    local got = vim.api.nvim_get_hl(0, { name = "TestLink1", link = false })
     assert.is_same(want, got)
   end)
 
