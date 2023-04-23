@@ -2,10 +2,7 @@ local helper = require("misclib.test.helper")
 local historylib = helper.require("misclib.history")
 
 describe("historylib", function()
-  before_each(function()
-    helper.before_each()
-    vim.fn.histdel("input")
-  end)
+  before_each(helper.before_each)
   after_each(helper.after_each)
 
   it("recalls does nothing if there is no stored", function()
@@ -47,7 +44,7 @@ describe("historylib", function()
     end
   end)
 
-  it("can recalls before", function()
+  it("can recalls latest entry", function()
     local store = historylib.new("input")
     store:save("1")
     store:save("2")
@@ -58,8 +55,18 @@ describe("historylib", function()
     end
 
     do
-      local got = store:recall(1)
+      local got = store:recall(1, "2")
       assert.equal("3", got)
+    end
+
+    do
+      local got = store:recall(-1, "4")
+      assert.equal("2", got)
+    end
+
+    do
+      local got = store:recall(1, "2")
+      assert.equal("4", got)
     end
   end)
 
