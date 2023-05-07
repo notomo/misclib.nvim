@@ -60,6 +60,31 @@ describe("list.group_by_adjacent()", function()
   end
 end)
 
+describe("list.group_by()", function()
+  before_each(helper.before_each)
+  after_each(helper.after_each)
+
+  for _, c in ipairs({
+    { name = "can use with empty list", list = {}, expected = {} },
+    {
+      name = "can group list by function",
+      list = { "", "", "a", "b", "", "c" },
+      make_key = function(e)
+        return #e == 0 and "empty" or "not_empty"
+      end,
+      expected = {
+        { "empty", { "", "", "" } },
+        { "not_empty", { "a", "b", "c" } },
+      },
+    },
+  }) do
+    it(c.name, function()
+      local actual = listlib.group_by(c.list, c.make_key)
+      assert.is_same(c.expected, actual)
+    end)
+  end
+end)
+
 describe("list.fill()", function()
   before_each(helper.before_each)
   after_each(helper.after_each)

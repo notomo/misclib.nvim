@@ -31,6 +31,22 @@ function M.group_by_adjacent(list, make_key)
   return groups
 end
 
+function M.group_by(list, make_key)
+  local new_list = {}
+  local indicies = {}
+  for _, element in ipairs(list) do
+    local key = make_key(element)
+
+    local index = indicies[key] or (vim.tbl_count(indicies) + 1)
+    indicies[key] = index
+
+    local group = new_list[index] or { key, {} }
+    table.insert(group[2], element)
+    new_list[index] = group
+  end
+  return new_list
+end
+
 function M.fill(list, length, element)
   local new_list = vim.deepcopy(list)
   for _ = #list + 1, length, 1 do
