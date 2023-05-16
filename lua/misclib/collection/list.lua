@@ -55,4 +55,17 @@ function M.fill(list, length, element)
   return new_list
 end
 
+function M.join_by(list, separator)
+  if #list == 0 then
+    return vim.iter(list):totable()
+  end
+  local new_list = {}
+  for e in vim.iter(list):skipback(1) do
+    table.insert(new_list, e)
+    table.insert(new_list, separator)
+  end
+  table.insert(new_list, list[#list])
+  return new_list
+end
+
 return M

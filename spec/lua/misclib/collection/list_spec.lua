@@ -111,3 +111,40 @@ describe("list.fill()", function()
     end)
   end
 end)
+
+describe("list.join_by()", function()
+  before_each(helper.before_each)
+  after_each(helper.after_each)
+
+  for _, c in ipairs({
+    {
+      name = "case length == 0",
+      list = {},
+      element = 0,
+      expected = {},
+    },
+    {
+      name = "case length == 1",
+      list = { 1 },
+      element = 0,
+      expected = { 1 },
+    },
+    {
+      name = "case length == 2",
+      list = { 1, 1 },
+      element = 0,
+      expected = { 1, 0, 1 },
+    },
+    {
+      name = "case length > 2",
+      list = { 1, 1, 1 },
+      element = 0,
+      expected = { 1, 0, 1, 0, 1 },
+    },
+  }) do
+    it(c.name, function()
+      local actual = listlib.join_by(c.list, c.element)
+      assert.is_same(c.expected, actual)
+    end)
+  end
+end)
