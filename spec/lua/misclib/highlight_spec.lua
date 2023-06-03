@@ -10,7 +10,7 @@ describe("highlightlib.define()", function()
       fg = 100,
     })
     local got = vim.api.nvim_get_hl(0, { name = "TestDefine1" })
-    assert.is_same({ fg = 100 }, got)
+    assert.is_same({ default = true, fg = 100 }, got)
   end)
 
   it("returns highlight group name", function()
