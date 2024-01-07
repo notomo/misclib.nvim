@@ -1,6 +1,29 @@
 *misclib.nvim.txt*
 
 ==============================================================================
+Lua module: misclib.highlight                 *misclib.nvim-misclib.highlight*
+
+define({hl_group}, {attributes})                  *misclib.highlight.define()*
+  Defines a default highlight group.
+
+  Parameters: ~
+    {hl_group} (string) highlight group name
+    {attributes} (table) |nvim_set_hl| val parameter
+
+  Return: ~
+    (string) hl_group
+
+link({hl_group}, {to})                              *misclib.highlight.link()*
+  Makes a highlight group link.
+
+  Parameters: ~
+    {hl_group} (string) highlight group name
+    {to} (string) highlight group name to link |:hl-link|
+
+  Return: ~
+    (string) hl_group
+
+==============================================================================
 Lua module: misclib.module                       *misclib.nvim-misclib.module*
 
 find({path})                                           *misclib.module.find()*
