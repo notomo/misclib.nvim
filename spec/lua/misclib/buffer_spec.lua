@@ -19,15 +19,25 @@ describe("buffer.delete_by_name()", function()
   end)
 end)
 
-describe("buffer.set_lines_as_modifiable()", function()
+describe("buffer.find()", function()
   before_each(helper.before_each)
   after_each(helper.after_each)
 
-  it("sets lines event if the buffer is not modifiable", function()
-    vim.bo.modifiable = false
+  it("return bufnr that exactly matched with path", function()
+    local path = helper.test_data:create_file("hoge")
+    vim.cmd.edit(path)
+    local bufnr = vim.api.nvim_get_current_buf()
 
-    bufferlib.set_lines_as_modifiable(0, 0, -1, false, { "test" })
+    local got = bufferlib.find(path)
+    assert.equal(got, bufnr)
+  end)
 
-    assert.current_line("test")
+  it("can find even if the buffer path include special characters", function()
+    local path = helper.test_data:create_file("[test]?{}*.,~")
+    vim.cmd.edit(path)
+    local bufnr = vim.api.nvim_get_current_buf()
+
+    local got = bufferlib.find(path)
+    assert.equal(got, bufnr)
   end)
 end)
