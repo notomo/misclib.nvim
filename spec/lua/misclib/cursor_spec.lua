@@ -39,7 +39,7 @@ describe("cursorlib.set_column()", function()
   it("sets cursor column", function()
     helper.set_lines([[
 
-1234
+12345
 
 ]])
     vim.cmd.normal({ args = { "j" }, bang = true })
@@ -47,6 +47,19 @@ describe("cursorlib.set_column()", function()
     cursorlib.set_column(3)
 
     assert.same({ 2, 3 }, vim.api.nvim_win_get_cursor(0))
+  end)
+
+  it("can set column greater than column end", function()
+    helper.set_lines([[
+
+12345
+
+]])
+    vim.cmd.normal({ args = { "j" }, bang = true })
+
+    cursorlib.set_column(10)
+
+    assert.same({ 2, 4 }, vim.api.nvim_win_get_cursor(0))
   end)
 end)
 
