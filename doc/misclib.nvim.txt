@@ -36,4 +36,42 @@ find({path})                                           *misclib.module.find()*
     (any) If the module is not found, return nil.
 
 ==============================================================================
+Lua module: misclib.observable               *misclib.nvim-misclib.observable*
+
+unsubscribe()                               *misclib.observable:unsubscribe()*
+  Unsubscribe this subscription.
+
+closed()                                         *misclib.observable:closed()*
+  Returns whether this subscription is closed.
+
+  Return: ~
+    (boolean) 
+
+new({subscriber})                                   *misclib.observable.new()*
+
+  Parameters: ~
+    {subscriber} (fun(observer:Observer):fun()?) 
+
+subscribe({observer})                         *misclib.observable:subscribe()*
+
+  Parameters: ~
+    {observer} (Observer) 
+
+  Return: ~
+    (Subscription) 
+
+==============================================================================
+STRUCTURE                                             *misclib.nvim-STRUCTURE*
+
+Subscription                                                    *Subscription*
+
+
+Observer                                                            *Observer*
+
+- {start} (fun()?)
+- {next} (fun(...:any)?)
+- {error} (fun(...:any)?)
+- {complete} (fun()?)
+
+==============================================================================
 vim:tw=78:ts=8:ft=help
