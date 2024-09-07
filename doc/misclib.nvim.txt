@@ -38,10 +38,10 @@ find({path})                                           *misclib.module.find()*
 ==============================================================================
 Lua module: misclib.observable               *misclib.nvim-misclib.observable*
 
-unsubscribe()                               *misclib.observable:unsubscribe()*
+Subscription.unsubscribe()     *misclib.observable.Subscription:unsubscribe()*
   Unsubscribe this subscription.
 
-closed()                                         *misclib.observable:closed()*
+Subscription.closed()               *misclib.observable.Subscription:closed()*
   Returns whether this subscription is closed.
 
   Return: ~
