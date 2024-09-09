@@ -1,4 +1,5 @@
 local helper = require("misclib.test.helper")
+local assert = require("assertlib").typed(assert)
 
 describe("ordered_dict", function()
   before_each(helper.before_each)
@@ -28,7 +29,7 @@ describe("ordered_dict", function()
           dict[item.key] = item.value
         end
         local actual = dict:raw()
-        assert.is_same(c.expected, actual)
+        assert.same(c.expected, actual)
       end
     )
   end

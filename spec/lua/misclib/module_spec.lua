@@ -1,5 +1,6 @@
 local helper = require("misclib.test.helper")
 local modulelib = helper.require("misclib.module")
+local assert = require("assertlib").typed(assert)
 
 describe("modulelib.find()", function()
   before_each(helper.before_each)
@@ -10,7 +11,7 @@ describe("modulelib.find()", function()
     vim.opt.runtimepath:prepend(helper.test_data.full_path)
 
     local m = modulelib.find("valid")
-    assert.is_same({ ok = 8888 }, m)
+    assert.same({ ok = 8888 }, m)
   end)
 
   it("returns nil if not found", function()
@@ -24,6 +25,6 @@ describe("modulelib.find()", function()
 
     local ok, result = pcall(modulelib.find, "error")
     assert.is_false(ok)
-    assert.matches("raised error$", result)
+    assert.match("raised error$", result)
   end)
 end)

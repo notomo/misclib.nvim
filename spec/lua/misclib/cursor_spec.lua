@@ -1,5 +1,6 @@
 local helper = require("misclib.test.helper")
 local cursorlib = helper.require("misclib.cursor")
+local assert = require("assertlib").typed(assert)
 
 describe("cursorlib.to_bottom()", function()
   before_each(helper.before_each)

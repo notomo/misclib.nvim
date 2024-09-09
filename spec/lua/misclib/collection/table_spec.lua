@@ -1,5 +1,6 @@
 local helper = require("misclib.test.helper")
 local tablelib = helper.require("misclib.collection.table")
+local assert = require("assertlib").typed(assert)
 
 describe("tablelib.group_by()", function()
   before_each(helper.before_each)
@@ -38,7 +39,7 @@ describe("tablelib.group_by()", function()
   }) do
     it(c.name, function()
       local actual = tablelib.group_by(c.list, c.make_key)
-      assert.is_same(c.expected, actual)
+      assert.same(c.expected, actual)
     end)
   end
 end)

@@ -1,5 +1,6 @@
 local helper = require("misclib.test.helper")
 local bufferlib = helper.require("misclib.buffer")
+local assert = require("assertlib").typed(assert)
 
 describe("buffer.delete_by_name()", function()
   before_each(helper.before_each)

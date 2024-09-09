@@ -1,5 +1,6 @@
 local helper = require("misclib.test.helper")
 local historylib = helper.require("misclib.history")
+local assert = require("assertlib").typed(assert)
 
 describe("historylib", function()
   before_each(helper.before_each)

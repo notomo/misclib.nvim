@@ -1,5 +1,6 @@
 local helper = require("misclib.test.helper")
 local MultiError = helper.require("misclib.multi_error")
+local assert = require("assertlib").typed(assert)
 
 describe("MultiError", function()
   before_each(helper.before_each)

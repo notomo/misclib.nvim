@@ -1,5 +1,6 @@
 local helper = require("misclib.test.helper")
 local highlightlib = helper.require("misclib.highlight")
+local assert = require("assertlib").typed(assert)
 
 describe("highlightlib.define()", function()
   before_each(helper.before_each)
@@ -10,14 +11,14 @@ describe("highlightlib.define()", function()
       fg = 100,
     })
     local got = vim.api.nvim_get_hl(0, { name = "TestDefine1" })
-    assert.is_same({ default = true, fg = 100 }, got)
+    assert.same({ default = true, fg = 100 }, got)
   end)
 
   it("returns highlight group name", function()
     local got = highlightlib.define("TestDefine2", {
       fg = 100,
     })
-    assert.equals("TestDefine2", got)
+    assert.equal("TestDefine2", got)
   end)
 end)
 
@@ -29,11 +30,11 @@ describe("highlightlib.link()", function()
     highlightlib.link("TestLink1", "String")
     local want = vim.api.nvim_get_hl(0, { name = "String", link = false })
     local got = vim.api.nvim_get_hl(0, { name = "TestLink1", link = false })
-    assert.is_same(want, got)
+    assert.same(want, got)
   end)
 
   it("returns highlight group name", function()
     local got = highlightlib.link("TestLink2", "String")
-    assert.equals("TestLink2", got)
+    assert.equal("TestLink2", got)
   end)
 end)

@@ -1,5 +1,6 @@
 local helper = require("misclib.test.helper")
 local visual_mode = helper.require("misclib.visual_mode")
+local assert = require("assertlib").typed(assert)
 
 describe("visual_mode.is_current()", function()
   before_each(helper.before_each)
@@ -65,6 +66,6 @@ describe("visual_mode.row_range()", function()
     vim.cmd.normal({ args = { "V2j" }, bang = true })
 
     local actual = visual_mode.row_range()
-    assert.is_same(actual, { first = 1, last = 3 })
+    assert.same(actual, { first = 1, last = 3 })
   end)
 end)

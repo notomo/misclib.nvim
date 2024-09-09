@@ -1,5 +1,6 @@
 local helper = require("misclib.test.helper")
 local tslib = helper.require("misclib.treesitter")
+local assert = require("assertlib").typed(assert)
 
 describe("tslib.has_parser()", function()
   before_each(helper.before_each)

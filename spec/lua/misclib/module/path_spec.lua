@@ -1,5 +1,6 @@
 local helper = require("misclib.test.helper")
 local module_path = helper.require("misclib.module.path")
+local assert = require("assertlib").typed(assert)
 
 describe("module.path.detect()", function()
   before_each(helper.before_each)
@@ -22,7 +23,7 @@ describe("module.path.detect()", function()
     local name = ("%s -> %s"):format(c.file_path, c.want)
     it(name, function()
       local got = module_path.detect(c.file_path)
-      assert.equals(c.want, got)
+      assert.equal(c.want, got)
     end)
   end
 end)

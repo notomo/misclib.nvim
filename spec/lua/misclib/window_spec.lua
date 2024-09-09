@@ -1,5 +1,6 @@
 local helper = require("misclib.test.helper")
 local windowlib = helper.require("misclib.window")
+local assert = require("assertlib").typed(assert)
 
 describe("window.safe_close()", function()
   before_each(helper.before_each)

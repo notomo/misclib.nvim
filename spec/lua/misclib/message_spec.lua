@@ -1,5 +1,6 @@
 local helper = require("misclib.test.helper")
 local messagelib = helper.require("misclib.message")
+local assert = require("assertlib").typed(assert)
 
 describe("messagelib.info()", function()
   before_each(helper.before_each)

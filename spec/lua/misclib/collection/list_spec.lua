@@ -1,5 +1,6 @@
 local helper = require("misclib.test.helper")
 local listlib = helper.require("misclib.collection.list")
+local assert = require("assertlib").typed(assert)
 
 describe("list.unique()", function()
   before_each(helper.before_each)
@@ -28,7 +29,7 @@ describe("list.unique()", function()
   }) do
     it(c.name, function()
       local actual = listlib.unique(c.list, c.make_key)
-      assert.is_same(c.expected, actual)
+      assert.same(c.expected, actual)
     end)
   end
 end)
@@ -55,7 +56,7 @@ describe("list.group_by_adjacent()", function()
   }) do
     it(c.name, function()
       local actual = listlib.group_by_adjacent(c.list, c.make_key)
-      assert.is_same(c.expected, actual)
+      assert.same(c.expected, actual)
     end)
   end
 end)
@@ -80,7 +81,7 @@ describe("list.group_by()", function()
   }) do
     it(c.name, function()
       local actual = listlib.group_by(c.list, c.make_key)
-      assert.is_same(c.expected, actual)
+      assert.same(c.expected, actual)
     end)
   end
 end)
@@ -107,7 +108,7 @@ describe("list.fill()", function()
   }) do
     it(c.name, function()
       local actual = listlib.fill(c.list, c.length, c.element)
-      assert.is_same(c.expected, actual)
+      assert.same(c.expected, actual)
     end)
   end
 end)
@@ -144,7 +145,7 @@ describe("list.join_by()", function()
   }) do
     it(c.name, function()
       local actual = listlib.join_by(c.list, c.element)
-      assert.is_same(c.expected, actual)
+      assert.same(c.expected, actual)
     end)
   end
 end)
