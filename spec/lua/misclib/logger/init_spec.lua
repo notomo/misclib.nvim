@@ -1,4 +1,5 @@
 local helper = require("misclib.test.helper")
+local assert = require("assertlib").typed(assert)
 
 describe("logger", function()
   before_each(helper.before_each)
@@ -12,6 +13,7 @@ describe("logger", function()
     file:flush()
 
     local f = io.open(file_path, "r")
+    assert(f)
     local content = f:read("*a")
     assert.equal("[INFO] test\n", content)
   end)
