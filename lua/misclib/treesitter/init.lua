@@ -1,14 +1,8 @@
 local M = {}
 
 function M.has_parser(language)
-  local ok, err = pcall(vim.treesitter.language.add, language)
-  if type(err) == "string" and err:match(" no parser ") then
-    return false
-  end
-  if not ok then
-    error(err)
-  end
-  return true
+  local parser = vim.treesitter.get_parser(0, language, { error = false })
+  return parser ~= nil
 end
 
 function M.get_first_tree_root(source, language)
@@ -25,6 +19,7 @@ function M.get_first_tree_root(source, language)
     factory = vim.treesitter.get_string_parser
   end
   local parser = factory(source, language)
+  assert(parser, ("failed to get parser: `%s`"):format(language))
 
   local trees = parser:parse()
   return trees[1]:root()
