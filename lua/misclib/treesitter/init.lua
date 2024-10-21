@@ -5,9 +5,9 @@ function M.has_parser(language)
   return parser ~= nil
 end
 
+--- @param source integer|string
+--- @param language string
 function M.get_first_tree_root(source, language)
-  vim.validate({ source = { source, { "number", "string" } } })
-
   if not M.has_parser(language) then
     return nil, ("not found tree-sitter parser for `%s`"):format(language)
   end

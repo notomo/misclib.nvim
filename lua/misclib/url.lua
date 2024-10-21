@@ -1,7 +1,7 @@
 local M = {}
 
+--- @param url string
 function M.encode(url)
-  vim.validate({ url = { url, "string" } })
   url = url:gsub("\n", "\r\n")
   url = url:gsub("([^%w %/:.])", function(char)
     return ("%%%02X"):format(char:byte())
@@ -10,8 +10,8 @@ function M.encode(url)
   return url
 end
 
+--- @param url string
 function M.decode(url)
-  vim.validate({ url = { url, "string" } })
   url = url:gsub("+", " ")
   url = url:gsub("%%(%x%x)", function(hex)
     return string.char(tonumber(hex, 16))

@@ -1,6 +1,42 @@
 *misclib.nvim.txt*
 
 ==============================================================================
+Lua module: misclib.cursor                       *misclib.nvim-misclib.cursor*
+
+to_bottom({window_id})                            *misclib.cursor.to_bottom()*
+
+  Parameters: ~
+    {window_id} (integer?) 
+
+set_column({column}, {window_id})                *misclib.cursor.set_column()*
+
+  Parameters: ~
+    {column} (integer) 
+    {window_id} (integer?) 
+
+set({position}, {window_id})                            *misclib.cursor.set()*
+
+  Parameters: ~
+    {position} ([integer,integer]) 
+    {window_id} (integer?) 
+
+==============================================================================
+Lua module: misclib.decorator                 *misclib.nvim-misclib.decorator*
+
+new({ns}, {bufnr}, {is_ephemeral})                   *misclib.decorator.new()*
+
+  Parameters: ~
+    {ns} (integer) 
+    {bufnr} (integer) 
+    {is_ephemeral} (boolean) 
+
+factory({key}, {bufnr})                          *misclib.decorator.factory()*
+
+  Parameters: ~
+    {key} (string) 
+    {bufnr} (integer?) 
+
+==============================================================================
 Lua module: misclib.highlight                 *misclib.nvim-misclib.highlight*
 
 define({hl_group}, {attributes})                  *misclib.highlight.define()*
@@ -22,6 +58,29 @@ link({hl_group}, {to})                              *misclib.highlight.link()*
 
   Return: ~
     (string) hl_group
+
+==============================================================================
+Lua module: misclib.logger                       *misclib.nvim-misclib.logger*
+
+new({output}, {opts})                                   *misclib.logger.new()*
+
+  Parameters: ~
+    {output} (fun(string)) 
+    {opts} ({level:integer?,prefix:string?}?) 
+
+add_prefix({prefix})                             *misclib.logger:add_prefix()*
+
+  Parameters: ~
+    {prefix} (string) 
+
+==============================================================================
+Lua module: misclib.logger.file             *misclib.nvim-misclib.logger.file*
+
+output({path_suffix}, {base_dir_path})          *misclib.logger.file.output()*
+
+  Parameters: ~
+    {path_suffix} (string) 
+    {base_dir_path} (string?) 
 
 ==============================================================================
 Lua module: misclib.module                       *misclib.nvim-misclib.module*
@@ -59,6 +118,29 @@ subscribe({observer})                         *misclib.observable:subscribe()*
 
   Return: ~
     (Subscription) 
+
+==============================================================================
+Lua module: misclib.treesitter               *misclib.nvim-misclib.treesitter*
+
+get_first_tree_root({source}, {language})
+                                    *misclib.treesitter.get_first_tree_root()*
+
+  Parameters: ~
+    {source} (integer|string) 
+    {language} (string) 
+
+==============================================================================
+Lua module: misclib.url                             *misclib.nvim-misclib.url*
+
+encode({url})                                           *misclib.url.encode()*
+
+  Parameters: ~
+    {url} (string) 
+
+decode({url})                                           *misclib.url.decode()*
+
+  Parameters: ~
+    {url} (string) 
 
 ==============================================================================
 STRUCTURE                                             *misclib.nvim-STRUCTURE*
