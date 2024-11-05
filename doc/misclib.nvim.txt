@@ -129,6 +129,9 @@ get_first_tree_root({source}, {language})
     {source} (integer|string) 
     {language} (string) 
 
+  Return: ~
+    (TSNode|string) 
+
 ==============================================================================
 Lua module: misclib.url                             *misclib.nvim-misclib.url*
 
