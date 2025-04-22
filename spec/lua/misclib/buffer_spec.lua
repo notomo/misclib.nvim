@@ -34,8 +34,8 @@ describe("buffer.find()", function()
   end)
 
   it("can find even if the buffer path include special characters", function()
-    local path = helper.test_data:create_file("[test]?{}*.,~")
-    vim.cmd.edit(path)
+    local path = helper.test_data:create_file("[test]?{}*.,%#~\\")
+    vim.cmd.edit(([[`='%s'`]]):format(path:gsub("'", "''")))
     local bufnr = vim.api.nvim_get_current_buf()
 
     local got = bufferlib.find(path)
