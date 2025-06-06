@@ -89,4 +89,14 @@ describe("cursorlib.set()", function()
 
     assert.same({ 2, 3 }, vim.api.nvim_win_get_cursor(0))
   end)
+
+  it("sets cursor position even if the column does not exist", function()
+    helper.set_lines([[
+
+1234]])
+
+    cursorlib.set({ 2, -1 })
+
+    assert.same({ 2, 0 }, vim.api.nvim_win_get_cursor(0))
+  end)
 end)
