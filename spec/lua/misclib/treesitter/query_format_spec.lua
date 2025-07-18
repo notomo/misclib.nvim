@@ -26,6 +26,16 @@ describe("misclib.treesitter.query_format.execute()", function()
     },
     {
       expr = [[
+(arguments (string content: (string_content)))
+]],
+      want = [[
+(arguments
+  (string
+    content: (string_content)))
+]],
+    },
+    {
+      expr = [[
 (expression_list value: (function_call name: (identifier) arguments: (arguments (string content: (string_content)))))
 ]],
       want = [[
