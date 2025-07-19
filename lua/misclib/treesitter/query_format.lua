@@ -60,7 +60,7 @@ function M.execute(expr)
       local field_defs = {}
       local nested_nodes = {}
       local quantifier_text = ""
-      local capture_text = ""
+      local capture_texts = {}
 
       for child, field_name in node:iter_children() do
         local child_type = child:type()
@@ -73,7 +73,7 @@ function M.execute(expr)
         elseif child_type == "quantifier" then
           quantifier_text = vim.treesitter.get_node_text(child, expr)
         elseif child_type == "capture" then
-          capture_text = vim.treesitter.get_node_text(child, expr)
+          table.insert(capture_texts, vim.treesitter.get_node_text(child, expr))
         end
       end
 
@@ -100,7 +100,12 @@ function M.execute(expr)
         end
       end
 
-      table.insert(parts, ")" .. quantifier_text .. " " .. capture_text)
+      local capture_text = ""
+      if #capture_texts > 0 then
+        capture_text = " " .. table.concat(capture_texts, " ")
+      end
+
+      table.insert(parts, ")" .. quantifier_text .. capture_text)
       return table.concat(parts):gsub("%s+$", "")
     end
 

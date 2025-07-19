@@ -117,6 +117,14 @@ describe("misclib.treesitter.query_format.execute()", function()
 ; comment2
 (test2)]],
     },
+    {
+      expr = [[(comment) @comment @spell]],
+      want = [[(comment) @comment @spell]],
+    },
+    {
+      expr = [[(test)* @capture1 @capture2 @capture3]],
+      want = [[(test)* @capture1 @capture2 @capture3]],
+    },
   }) do
     it(("format %s"):format(vim.inspect(c.expr, { newline = " " })), function()
       local got = query_format.execute(c.expr)
