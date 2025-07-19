@@ -16,6 +16,7 @@ function M.execute(expr)
     if node_type == "program" then
       local result = {}
       local current_line = {}
+      local last_type = nil
 
       for child in node:iter_children() do
         local child_type = child:type()
@@ -28,7 +29,21 @@ function M.execute(expr)
               result[#result] = result[#result] .. " " .. table.concat(current_line, " ")
               current_line = {}
             end
+
+            local should_add_empty_line = false
+            if #result > 0 and last_type then
+              -- コメント関連では空行を入れない（コメント同士、コメント→ノード）
+              if last_type ~= "comment" then
+                should_add_empty_line = true
+              end
+            end
+
+            if should_add_empty_line then
+              table.insert(result, "")
+            end
+
             table.insert(result, formatted)
+            last_type = child_type
           end
         end
       end
@@ -37,7 +52,7 @@ function M.execute(expr)
         result[#result] = result[#result] .. " " .. table.concat(current_line, " ")
       end
 
-      return table.concat(result, "\n\n")
+      return table.concat(result, "\n")
     end
 
     if node_type == "named_node" then
