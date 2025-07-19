@@ -15,12 +15,28 @@ function M.execute(expr)
 
     if node_type == "program" then
       local result = {}
+      local current_line = {}
+
       for child in node:iter_children() do
+        local child_type = child:type()
         local formatted = format_node(child, indent)
         if formatted ~= "" then
-          table.insert(result, formatted)
+          if child_type == "predicate" then
+            table.insert(current_line, formatted)
+          else
+            if #current_line > 0 then
+              result[#result] = result[#result] .. " " .. table.concat(current_line, " ")
+              current_line = {}
+            end
+            table.insert(result, formatted)
+          end
         end
       end
+
+      if #current_line > 0 and #result > 0 then
+        result[#result] = result[#result] .. " " .. table.concat(current_line, " ")
+      end
+
       return table.concat(result, "\n")
     end
 
@@ -28,6 +44,8 @@ function M.execute(expr)
       local name_text = ""
       local field_defs = {}
       local nested_nodes = {}
+      local quantifier_text = ""
+      local capture_text = ""
 
       for child, field_name in node:iter_children() do
         local child_type = child:type()
@@ -37,6 +55,10 @@ function M.execute(expr)
           table.insert(field_defs, child)
         elseif child_type == "named_node" then
           table.insert(nested_nodes, child)
+        elseif child_type == "quantifier" then
+          quantifier_text = vim.treesitter.get_node_text(child, expr)
+        elseif child_type == "capture" then
+          capture_text = vim.treesitter.get_node_text(child, expr)
         end
       end
 
@@ -63,8 +85,8 @@ function M.execute(expr)
         end
       end
 
-      table.insert(parts, ")")
-      return table.concat(parts)
+      table.insert(parts, ")" .. quantifier_text .. " " .. capture_text)
+      return table.concat(parts):gsub("%s+$", "")
     end
 
     if node_type == "field_definition" then
@@ -139,7 +161,31 @@ function M.execute(expr)
       return vim.treesitter.get_node_text(node, expr)
     end
 
-    return ""
+    if node_type == "predicate" then
+      return vim.treesitter.get_node_text(node, expr)
+    end
+
+    if node_type == "quantifier" then
+      return vim.treesitter.get_node_text(node, expr)
+    end
+
+    if node_type == "anonymous_node" then
+      return vim.treesitter.get_node_text(node, expr)
+    end
+
+    if node_type == "grouping" then
+      return vim.treesitter.get_node_text(node, expr)
+    end
+
+    if node_type == "definition" then
+      return vim.treesitter.get_node_text(node, expr)
+    end
+
+    if node_type == "comment" then
+      return vim.treesitter.get_node_text(node, expr)
+    end
+
+    return vim.treesitter.get_node_text(node, expr)
   end
 
   local result = format_node(root_node, 0)

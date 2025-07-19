@@ -51,6 +51,27 @@ describe("misclib.treesitter.query_format.execute()", function()
       (string
         content: (string_content)))))]],
     },
+    {
+      expr = [[(test)* @capture]],
+      want = [[(test)* @capture]],
+    },
+    {
+      expr = [[(test) @capture (#eq? @capture "value")]],
+      want = [[(test) @capture (#eq? @capture "value")]],
+    },
+    {
+      expr = [[(test) @capture (#eq? @capture "value") (#not-eq? @capture "other")]],
+      want = [[(test) @capture (#eq? @capture "value") (#not-eq? @capture "other")]],
+    },
+    {
+      expr = [["literal"]],
+      want = [["literal"]],
+    },
+    {
+      expr = [[(test (nested)?)]],
+      want = [[(test
+  (nested)?)]],
+    },
   }) do
     it(("format %s"):format(vim.inspect(c.expr, { newline = " " })), function()
       local got = query_format.execute(c.expr)
