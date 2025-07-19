@@ -53,7 +53,7 @@ function M.execute(expr)
           name_text = vim.treesitter.get_node_text(child, expr)
         elseif child_type == "field_definition" then
           table.insert(field_defs, child)
-        elseif child_type == "named_node" then
+        elseif child_type == "named_node" or child_type == "anonymous_node" then
           table.insert(nested_nodes, child)
         elseif child_type == "quantifier" then
           quantifier_text = vim.treesitter.get_node_text(child, expr)
@@ -128,7 +128,7 @@ function M.execute(expr)
 
       for child in node:iter_children() do
         local child_type = child:type()
-        if child_type == "named_node" then
+        if child_type == "named_node" or child_type == "anonymous_node" then
           local formatted = format_node(child, indent + 2)
           if formatted ~= "" then
             table.insert(list_items, formatted)
@@ -152,40 +152,23 @@ function M.execute(expr)
 
     if
       node_type == "identifier"
-      or node_type == "string"
-      or node_type == "string_content"
       or node_type == "predicate_type"
       or node_type == "parameters"
       or node_type == "capture"
+      or node_type == "quantifier"
+      or node_type == "predicate"
+      or node_type == "grouping"
+      or node_type == "definition"
+      or node_type == "comment"
     then
       return vim.treesitter.get_node_text(node, expr)
     end
 
-    if node_type == "predicate" then
-      return vim.treesitter.get_node_text(node, expr)
+    if node_type == "string" or node_type == "string_content" or node_type == "anonymous_node" then
+      return string.rep(" ", indent) .. vim.treesitter.get_node_text(node, expr)
     end
 
-    if node_type == "quantifier" then
-      return vim.treesitter.get_node_text(node, expr)
-    end
-
-    if node_type == "anonymous_node" then
-      return vim.treesitter.get_node_text(node, expr)
-    end
-
-    if node_type == "grouping" then
-      return vim.treesitter.get_node_text(node, expr)
-    end
-
-    if node_type == "definition" then
-      return vim.treesitter.get_node_text(node, expr)
-    end
-
-    if node_type == "comment" then
-      return vim.treesitter.get_node_text(node, expr)
-    end
-
-    return vim.treesitter.get_node_text(node, expr)
+    return string.rep(" ", indent) .. vim.treesitter.get_node_text(node, expr)
   end
 
   local result = format_node(root_node, 0)

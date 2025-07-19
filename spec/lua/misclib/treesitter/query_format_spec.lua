@@ -85,6 +85,18 @@ describe("misclib.treesitter.query_format.execute()", function()
 
 (test2) @other]],
     },
+    {
+      expr = [[[")" "+"] @indent.end]],
+      want = [[[
+  ")"
+  "+"
+] @indent.end]],
+    },
+    {
+      expr = [[(ERROR "(") @indent.begin]],
+      want = [[(ERROR
+  "(") @indent.begin]],
+    },
   }) do
     it(("format %s"):format(vim.inspect(c.expr, { newline = " " })), function()
       local got = query_format.execute(c.expr)
