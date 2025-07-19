@@ -97,6 +97,37 @@ function M.execute(expr)
       return ""
     end
 
+    if node_type == "list" then
+      local parts = {}
+      table.insert(parts, string.rep(" ", indent) .. "[")
+
+      local list_items = {}
+      local trailing_content = ""
+
+      for child in node:iter_children() do
+        local child_type = child:type()
+        if child_type == "named_node" then
+          local formatted = format_node(child, indent + 2)
+          if formatted ~= "" then
+            table.insert(list_items, formatted)
+          end
+        elseif child_type == "capture" or child_type == "predicate_type" then
+          trailing_content = " " .. vim.treesitter.get_node_text(child, expr)
+        end
+      end
+
+      if #list_items > 0 then
+        for _, item in ipairs(list_items) do
+          table.insert(parts, "\n" .. item)
+        end
+        table.insert(parts, "\n" .. string.rep(" ", indent) .. "]" .. trailing_content)
+      else
+        table.insert(parts, "]" .. trailing_content)
+      end
+
+      return table.concat(parts)
+    end
+
     if
       node_type == "identifier"
       or node_type == "string"
@@ -112,11 +143,6 @@ function M.execute(expr)
   end
 
   local result = format_node(root_node, 0)
-
-  if result:sub(-1) ~= "\n" and result ~= "" then
-    result = result .. "\n"
-  end
-
   return result
 end
 

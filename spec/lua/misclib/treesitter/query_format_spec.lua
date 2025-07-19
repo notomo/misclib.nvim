@@ -8,44 +8,48 @@ describe("misclib.treesitter.query_format.execute()", function()
 
   for _, c in ipairs({
     { expr = [[]], want = [[]] },
-    { expr = [[
-(variable_list name: (identifier))
-]], want = [[
-(variable_list
-  name: (identifier))
-]] },
     {
       expr = [[
-(dot_index_expression table: (identifier) field: (identifier))
-]],
+(variable_list name: (identifier))]],
+      want = [[
+(variable_list
+  name: (identifier))]],
+    },
+    {
+      expr = [[
+[(do_statement) (while_statement)] @fold]],
+      want = [[
+[
+  (do_statement)
+  (while_statement)
+] @fold]],
+    },
+    {
+      expr = [[
+(dot_index_expression table: (identifier) field: (identifier))]],
       want = [[
 (dot_index_expression
   table: (identifier)
-  field: (identifier))
-]],
+  field: (identifier))]],
     },
     {
       expr = [[
-(arguments (string content: (string_content)))
-]],
+(arguments (string content: (string_content)))]],
       want = [[
 (arguments
   (string
-    content: (string_content)))
-]],
+    content: (string_content)))]],
     },
     {
       expr = [[
-(expression_list value: (function_call name: (identifier) arguments: (arguments (string content: (string_content)))))
-]],
+(expression_list value: (function_call name: (identifier) arguments: (arguments (string content: (string_content)))))]],
       want = [[
 (expression_list
   value: (function_call
     name: (identifier)
     arguments: (arguments
       (string
-        content: (string_content)))))
-]],
+        content: (string_content)))))]],
     },
   }) do
     it(("format %s"):format(vim.inspect(c.expr, { newline = " " })), function()
