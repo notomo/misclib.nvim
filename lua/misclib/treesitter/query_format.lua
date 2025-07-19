@@ -64,7 +64,7 @@ function M.execute(expr)
 
       for child, field_name in node:iter_children() do
         local child_type = child:type()
-        if field_name == "name" and child_type == "identifier" then
+        if field_name == "name" and (child_type == "identifier" or child_type == "_") then
           name_text = vim.treesitter.get_node_text(child, expr)
         elseif child_type == "field_definition" then
           table.insert(field_defs, child)
@@ -117,7 +117,7 @@ function M.execute(expr)
         local child_type = child:type()
         if fname == "name" and child_type == "identifier" then
           field_name = vim.treesitter.get_node_text(child, expr)
-        elseif child_type == "named_node" then
+        elseif child_type == "named_node" or child_type == "anonymous_node" then
           field_value = child
         end
       end
@@ -172,6 +172,7 @@ function M.execute(expr)
 
     if
       node_type == "identifier"
+      or node_type == "_"
       or node_type == "predicate_type"
       or node_type == "parameters"
       or node_type == "capture"

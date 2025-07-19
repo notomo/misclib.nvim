@@ -125,6 +125,16 @@ describe("misclib.treesitter.query_format.execute()", function()
       expr = [[(test)* @capture1 @capture2 @capture3]],
       want = [[(test)* @capture1 @capture2 @capture3]],
     },
+    {
+      expr = [[(binary_operator
+  rhs: (_) @_no_indent)]],
+      want = [[(binary_operator
+  rhs: (_) @_no_indent)]],
+    },
+    {
+      expr = [[(_) @wildcard]],
+      want = [[(_) @wildcard]],
+    },
   }) do
     it(("format %s"):format(vim.inspect(c.expr, { newline = " " })), function()
       local got = query_format.execute(c.expr)
