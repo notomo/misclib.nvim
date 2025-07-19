@@ -37,7 +37,7 @@ function M.execute(expr)
         result[#result] = result[#result] .. " " .. table.concat(current_line, " ")
       end
 
-      return table.concat(result, "\n")
+      return table.concat(result, "\n\n")
     end
 
     if node_type == "named_node" then

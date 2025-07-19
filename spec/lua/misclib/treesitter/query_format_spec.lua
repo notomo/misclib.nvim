@@ -72,6 +72,19 @@ describe("misclib.treesitter.query_format.execute()", function()
       want = [[(test
   (nested)?)]],
     },
+    {
+      expr = [[(test1) (test2)]],
+      want = [[(test1)
+
+(test2)]],
+    },
+    {
+      expr = [[(test1) @capture (#eq? @capture "value")
+(test2) @other]],
+      want = [[(test1) @capture (#eq? @capture "value")
+
+(test2) @other]],
+    },
   }) do
     it(("format %s"):format(vim.inspect(c.expr, { newline = " " })), function()
       local got = query_format.execute(c.expr)
