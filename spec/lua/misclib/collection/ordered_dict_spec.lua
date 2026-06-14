@@ -1,5 +1,7 @@
+local ntf = require("ntf")
+local describe, it, before_each, after_each = ntf.describe, ntf.it, ntf.before_each, ntf.after_each
 local helper = require("misclib.test.helper")
-local assert = require("assertlib").typed(assert)
+local assert = require("assertlib").typed(ntf.assert)
 
 describe("ordered_dict", function()
   before_each(helper.before_each)

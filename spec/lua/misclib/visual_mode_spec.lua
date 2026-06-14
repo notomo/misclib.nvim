@@ -1,6 +1,8 @@
+local ntf = require("ntf")
+local describe, it, before_each, after_each = ntf.describe, ntf.it, ntf.before_each, ntf.after_each
 local helper = require("misclib.test.helper")
-local visual_mode = helper.require("misclib.visual_mode")
-local assert = require("assertlib").typed(assert)
+local visual_mode = require("misclib.visual_mode")
+local assert = require("assertlib").typed(ntf.assert)
 
 describe("visual_mode.is_current()", function()
   before_each(helper.before_each)

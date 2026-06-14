@@ -1,6 +1,8 @@
+local ntf = require("ntf")
+local describe, it, before_each, after_each = ntf.describe, ntf.it, ntf.before_each, ntf.after_each
 local helper = require("misclib.test.helper")
-local module_path = helper.require("misclib.module.path")
-local assert = require("assertlib").typed(assert)
+local module_path = require("misclib.module.path")
+local assert = require("assertlib").typed(ntf.assert)
 
 describe("module.path.detect()", function()
   before_each(helper.before_each)

@@ -1,6 +1,8 @@
+local ntf = require("ntf")
+local describe, it, before_each, after_each = ntf.describe, ntf.it, ntf.before_each, ntf.after_each
 local helper = require("misclib.test.helper")
-local bufferlib = helper.require("misclib.buffer")
-local assert = require("assertlib").typed(assert)
+local bufferlib = require("misclib.buffer")
+local assert = require("assertlib").typed(ntf.assert)
 
 describe("buffer.delete_by_name()", function()
   before_each(helper.before_each)

@@ -1,6 +1,8 @@
+local ntf = require("ntf")
+local describe, it, before_each, after_each = ntf.describe, ntf.it, ntf.before_each, ntf.after_each
 local helper = require("misclib.test.helper")
-local windowlib = helper.require("misclib.window")
-local assert = require("assertlib").typed(assert)
+local windowlib = require("misclib.window")
+local assert = require("assertlib").typed(ntf.assert)
 
 describe("window.safe_close()", function()
   before_each(helper.before_each)

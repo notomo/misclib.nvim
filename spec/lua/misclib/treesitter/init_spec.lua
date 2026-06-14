@@ -1,6 +1,8 @@
+local ntf = require("ntf")
+local describe, it, before_each, after_each = ntf.describe, ntf.it, ntf.before_each, ntf.after_each
 local helper = require("misclib.test.helper")
-local tslib = helper.require("misclib.treesitter")
-local assert = require("assertlib").typed(assert)
+local tslib = require("misclib.treesitter")
+local assert = require("assertlib").typed(ntf.assert)
 
 describe("tslib.has_parser()", function()
   before_each(helper.before_each)
