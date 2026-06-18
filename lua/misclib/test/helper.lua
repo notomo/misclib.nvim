@@ -8,8 +8,7 @@ require("assertlib").register(require("ntf.assert").register)
 helper.runtimepath = vim.o.runtimepath
 
 function helper.before_each()
-  helper.test_data =
-    require("misclib.test.data_dir").setup(helper.root, { base_dir = ("test_data_%d/"):format(vim.fn.getpid()) })
+  helper.test_data = require("misclib.test.data_dir").setup(helper.root, { base_dir = "spec/test_data/" })
 end
 
 function helper.after_each()
