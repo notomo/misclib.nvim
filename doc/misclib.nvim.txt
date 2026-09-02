@@ -44,7 +44,7 @@ define({hl_group}, {attributes})                  *misclib.highlight.define()*
 
   Parameters: ~
     {hl_group} (string) highlight group name
-    {attributes} (table) |nvim_set_hl| val parameter
+    {attributes} (table) |nvim_set_hl()| val parameter
 
   Return: ~
     (string) hl_group
@@ -54,7 +54,7 @@ link({hl_group}, {to})                              *misclib.highlight.link()*
 
   Parameters: ~
     {hl_group} (string) highlight group name
-    {to} (string) highlight group name to link |:hl-link|
+    {to} (string) highlight group name to link |:highlight-link|
 
   Return: ~
     (string) hl_group
