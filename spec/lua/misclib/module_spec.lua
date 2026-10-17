@@ -10,7 +10,7 @@ describe("modulelib.find()", function()
 
   it("returns the module if found", function()
     helper.test_data:create_file("lua/valid.lua", [[return {ok = 8888}]])
-    vim.opt.runtimepath:prepend(helper.test_data.full_path)
+    vim.api.nvim_set_option_value("runtimepath", helper.test_data.full_path, { operation = "prepend" })
 
     local m = modulelib.find("valid")
     assert.same({ ok = 8888 }, m)
@@ -23,7 +23,7 @@ describe("modulelib.find()", function()
 
   it("raises error if found but error", function()
     helper.test_data:create_file("lua/error.lua", [[error("raised error", 0)]])
-    vim.opt.runtimepath:prepend(helper.test_data.full_path)
+    vim.api.nvim_set_option_value("runtimepath", helper.test_data.full_path, { operation = "prepend" })
 
     local ok, result = pcall(modulelib.find, "error")
     assert.is_false(ok)
